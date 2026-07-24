@@ -1,0 +1,68 @@
+---
+title: "The Art of Clean Code"
+date: "2026-07-15"
+excerpt: "Why readability matters more than cleverness, and how to write code that your future self will thank you for."
+tags: ["programming", "best-practices"]
+author: "Mithil Astik"
+---
+
+There's a quote I keep coming back to: *"Any fool can write code that a computer can understand. Good programmers write code that humans can understand."* — Martin Fowler.
+
+Clean code isn't about following rules. It's about empathy — for the next person who reads your code, which is often future you.
+
+## Naming Things
+
+The hardest problem in computer science isn't cache invalidation. It's naming things in a way that communicates intent.
+
+```javascript
+// Bad: What does this do?
+const d = new Date() - u.c;
+
+// Good: Self-documenting
+const timeSinceLastLogin = Date.now() - user.lastLoginAt;
+```
+
+A good name eliminates the need for a comment. If you need a comment to explain *what* code does (not *why*), the code isn't clean enough.
+
+## Functions Should Do One Thing
+
+A function called `processUserData` that validates, transforms, saves, and sends an email is doing four things. Break it apart:
+
+```javascript
+function validateUser(data) { /* ... */ }
+function transformUserData(data) { /* ... */ }
+function saveUser(user) { /* ... */ }
+function sendWelcomeEmail(user) { /* ... */ }
+```
+
+Each function is testable, reusable, and replaceable. The composition becomes the documentation.
+
+## The Rule of Three
+
+Before abstracting, wait until you've seen the pattern three times. Premature abstraction creates more problems than duplication.
+
+1. First time: Just write the code
+2. Second time: Note the similarity, but keep it simple
+3. Third time: Now abstract
+
+## Error Handling is Not an Afterthought
+
+The happy path is easy. The error path is where real engineering happens. Handle errors explicitly, provide useful messages, and never swallow exceptions silently.
+
+```javascript
+try {
+  const result = await fetchData(endpoint);
+  return result;
+} catch (error) {
+  logger.error('Failed to fetch data', {
+    endpoint,
+    status: error.status,
+    message: error.message,
+  });
+  throw new AppError('Data fetch failed', { cause: error });
+}
+```
+
+## Closing Thoughts
+
+Clean code is a practice, not a destination. Every codebase has messy corners. The goal isn't perfection — it's continuous improvement. Leave the code a little better than you found it, every time.

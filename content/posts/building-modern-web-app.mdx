@@ -1,0 +1,71 @@
+---
+title: "Building a Modern Web App in 2026"
+date: "2026-07-20"
+excerpt: "A deep dive into the tools, frameworks, and patterns shaping modern web development this year."
+tags: ["web-dev", "javascript", "next.js"]
+author: "Mithil Astik"
+---
+
+The web development landscape has evolved dramatically. In 2026, the tools we use are more powerful, the frameworks more opinionated, and the expectations higher than ever. Here's how I approach building a modern web application from scratch.
+
+## Choosing the Right Stack
+
+The first decision — and often the most debated — is the tech stack. For most projects, I default to:
+
+- **Next.js** for the framework (App Router, RSC, great DX)
+- **Vanilla CSS** with custom properties for styling
+- **MDX** for content-heavy pages
+
+The key insight is that simpler stacks age better. Every dependency is a liability. Every abstraction is a tradeoff.
+
+## Server Components Changed Everything
+
+React Server Components fundamentally altered how we think about rendering. The ability to run components on the server, fetch data without waterfalls, and ship zero JavaScript for static UI is transformative.
+
+```javascript
+// This component ships ZERO JS to the client
+export default async function PostList() {
+  const posts = await getPosts();
+
+  return (
+    <ul>
+      {posts.map(post => (
+        <li key={post.slug}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+## Performance as a Feature
+
+Performance isn't an optimization — it's a feature. Users notice when things are fast. They *feel* it. Core Web Vitals aren't just metrics; they're proxies for user satisfaction.
+
+My checklist:
+1. Ship minimal JavaScript
+2. Use responsive images with proper formats
+3. Lazy-load below-the-fold content
+4. Preload critical resources
+5. Cache aggressively
+
+## The Design System Approach
+
+Instead of ad-hoc styling, I build a design system first — even for small projects. CSS custom properties make this trivial:
+
+```css
+:root {
+  --text-primary: #fafafa;
+  --bg-primary: #09090b;
+  --accent: #8b5cf6;
+  --space-4: 16px;
+  --radius-md: 8px;
+}
+```
+
+This consistency compounds. Every new component automatically inherits the design language.
+
+## Wrapping Up
+
+Building for the web in 2026 is about making deliberate choices. Choose simplicity over complexity. Choose standards over abstractions. Choose performance over convenience.
+
+The best tools are the ones you understand deeply, not the ones with the most stars on GitHub.

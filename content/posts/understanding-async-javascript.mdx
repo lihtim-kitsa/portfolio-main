@@ -1,0 +1,118 @@
+---
+title: "Understanding Async JavaScript"
+date: "2026-07-05"
+excerpt: "Demystifying callbacks, promises, and async/await — the event loop explained for humans."
+tags: ["javascript", "tutorial", "web-dev"]
+author: "Mithil Astik"
+---
+
+Asynchronous JavaScript trips up every developer at some point. The event loop is one of those concepts that seems simple on the surface but has surprising depth.
+
+Let's break it down from first principles.
+
+## The Single-Threaded Problem
+
+JavaScript runs on a single thread. One call stack. One thing at a time. So how does it handle network requests, timers, and user interactions without freezing?
+
+The answer: it doesn't do the waiting itself. It delegates.
+
+## The Event Loop
+
+The event loop is JavaScript's concurrency model. Think of it as a traffic controller:
+
+1. Execute synchronous code on the **call stack**
+2. When an async operation completes, its callback goes to the **task queue**
+3. The event loop checks: "Is the call stack empty?"
+4. If yes, move the next callback from the queue to the stack
+5. Repeat forever
+
+```javascript
+console.log('1: Start');
+
+setTimeout(() => {
+  console.log('2: Timeout');
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('3: Promise');
+});
+
+console.log('4: End');
+
+// Output: 1: Start, 4: End, 3: Promise, 2: Timeout
+```
+
+Notice the order. Promises (microtasks) are processed before setTimeout (macrotasks), even with a 0ms delay.
+
+## From Callbacks to Promises
+
+Callbacks work, but they nest. The infamous "callback hell":
+
+```javascript
+getUser(id, (user) => {
+  getPosts(user.id, (posts) => {
+    getComments(posts[0].id, (comments) => {
+      // Three levels deep and counting...
+    });
+  });
+});
+```
+
+Promises flatten this chain:
+
+```javascript
+getUser(id)
+  .then(user => getPosts(user.id))
+  .then(posts => getComments(posts[0].id))
+  .then(comments => {
+    // Flat and readable
+  })
+  .catch(error => handleError(error));
+```
+
+## Async/Await: The Final Form
+
+Async/await is syntactic sugar over Promises. It lets you write asynchronous code that *reads* like synchronous code:
+
+```javascript
+async function loadPostData(id) {
+  try {
+    const user = await getUser(id);
+    const posts = await getPosts(user.id);
+    const comments = await getComments(posts[0].id);
+    return { user, posts, comments };
+  } catch (error) {
+    handleError(error);
+  }
+}
+```
+
+Clean, readable, and easy to debug. But remember — under the hood, it's still Promises all the way down.
+
+## Common Pitfalls
+
+**Sequential when you want parallel:**
+
+```javascript
+// Slow: each await waits for the previous
+const users = await getUsers();
+const posts = await getPosts();
+
+// Fast: both run concurrently
+const [users, posts] = await Promise.all([
+  getUsers(),
+  getPosts()
+]);
+```
+
+**Forgetting error handling in async functions.** An unhandled rejection in an async function will crash your Node.js process.
+
+## Key Takeaways
+
+- JavaScript is single-threaded but non-blocking
+- The event loop enables concurrency without threads
+- Microtasks (Promises) run before macrotasks (setTimeout)
+- Use `Promise.all` for concurrent operations
+- Always handle errors in async code
+
+Understanding these fundamentals makes everything else in JavaScript click.
