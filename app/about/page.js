@@ -10,9 +10,9 @@ export default function AboutPage() {
         {'<!-- about.html - Mithil Astik -->'}
       </div>
 
-      <h1 style={{ 
-        fontFamily: 'var(--font-heading)', 
-        fontSize: '48px', 
+      <h1 style={{
+        fontFamily: 'var(--font-heading)',
+        fontSize: '48px',
         fontWeight: 900,
         color: '#ffffff',
         textTransform: 'uppercase',
@@ -35,25 +35,25 @@ export default function AboutPage() {
         <h2 style={{ fontSize: '16px', letterSpacing: '2px', color: 'var(--syn-property)', marginBottom: '24px', textTransform: 'uppercase' }}>
           Current Focus
         </h2>
-        
+
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', color: 'var(--vscode-text-muted)' }}>
           <div style={{ display: 'flex', gap: '12px' }}>
-            <span>🔭</span> Building performant CLI tools in Rust
+            <span></span> Building performant CLI tools in Rust
           </div>
           <div style={{ display: 'flex', gap: '12px' }}>
-            <span>🧠</span> Deep interest in security architectures
+            <span></span> Deep interest in security architectures
           </div>
           <div style={{ display: 'flex', gap: '12px' }}>
-            <span>🌱</span> Exploring WebAssembly and systems programming
+            <span></span> Exploring WebAssembly and systems programming
           </div>
           <div style={{ display: 'flex', gap: '12px' }}>
-            <span>💬</span> Talk to me about Linux, APIs, and open-source
+            <span></span> Talk to me about Linux, APIs, and open-source
           </div>
           <div style={{ display: 'flex', gap: '12px' }}>
-            <span>⚡</span> Making complex systems understandable
+            <span></span> Making complex systems understandable
           </div>
           <div style={{ display: 'flex', gap: '12px' }}>
-            <span>✨</span> Always learning, always shipping
+            <span></span> Always learning, always shipping
           </div>
         </div>
       </div>

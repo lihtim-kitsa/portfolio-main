@@ -137,52 +137,92 @@ a {
   }
 
   .vscode-sidebar {
-    width: 100% !important;
-    height: auto !important;
-    border-right: none !important;
-    border-top: 1px solid var(--vscode-border);
-    flex-direction: row !important;
-    order: 3; /* Move to bottom */
+    --mobile-close-display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px !important;
+    height: 100vh !important;
+    border-right: 1px solid var(--vscode-border) !important;
+    border-top: none !important;
+    flex-direction: column !important;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 4px 0 16px rgba(0,0,0,0.5);
   }
 
-  .vscode-editor-pane {
-    order: 1; /* Move above sidebar */
+  .vscode-sidebar.open {
+    transform: translateX(0);
   }
 
   .vscode-sidebar-header {
-    display: none !important;
+    display: flex !important;
   }
 
   .vscode-sidebar-files {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-around;
-    align-items: center;
+    display: block !important;
     width: 100%;
-    padding: 0 !important;
+    padding: 0 0 0 12px !important;
   }
 
   .vscode-sidebar-link {
-    padding: 8px !important;
-    border-left: none !important;
-    border-bottom: 2px solid transparent !important;
-    flex-direction: column !important;
-    gap: 4px !important;
-    font-size: 10px !important;
-    justify-content: center;
+    padding: 8px 16px !important;
+    border-left: 2px solid transparent !important;
+    border-bottom: none !important;
+    flex-direction: row !important;
+    gap: 8px !important;
+    font-size: 14px !important;
+    justify-content: flex-start !important;
   }
   
   .vscode-sidebar-link.active {
-    border-bottom: 2px solid var(--vscode-accent) !important;
+    border-left: 2px solid var(--vscode-accent) !important;
+    border-bottom: none !important;
     background-color: var(--vscode-hover) !important;
   }
 
   .vscode-sidebar-link-text {
-    display: none !important; /* Hide file names on very small screens, or we can keep them */
+    display: inline !important;
   }
   
   .vscode-editor-content {
     padding: 16px 12px;
+  }
+
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    height: 48px;
+    background: var(--vscode-sidebar-bg);
+    border-bottom: 1px solid var(--vscode-border);
+    gap: 16px;
+    flex-shrink: 0;
+  }
+
+  .mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-header, .mobile-overlay {
+    display: none !important;
   }
 }
 

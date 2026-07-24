@@ -47,7 +47,7 @@ export default function Home() {
         <Link href="/about" style={{ padding: '8px 24px', border: '1px solid var(--vscode-border)', borderRadius: '4px' }}>
           👤 About Me
         </Link>
-        <a href="mailto:hello@example.com" style={{ padding: '8px 24px', border: '1px solid var(--vscode-border)', borderRadius: '4px' }}>
+        <a href="/contact" style={{ padding: '8px 24px', border: '1px solid var(--vscode-border)', borderRadius: '4px' }}>
           ✉ Contact
         </a>
       </div>

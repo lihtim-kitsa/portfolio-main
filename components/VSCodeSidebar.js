@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ChevronDown, FileJson, FileType2, FileCode2, FileText, FolderOpen, Hash } from 'lucide-react';
+import { ChevronDown, FileJson, FileType2, FileCode2, FileText, FolderOpen, Hash, X } from 'lucide-react';
 
 export const FILES = [
   { name: 'home.tsx', path: '/', icon: <FileType2 size={16} color="#519aba" /> },
@@ -15,13 +15,19 @@ export const FILES = [
 
 import React from 'react';
 
-export default React.memo(function VSCodeSidebar() {
+export default React.memo(function VSCodeSidebar({ isOpen, onClose }) {
   const pathname = usePathname();
 
   return (
-    <div className="vscode-sidebar" style={{ width: '250px', background: 'var(--vscode-sidebar-bg)', borderRight: '1px solid var(--vscode-border)', display: 'flex', flexDirection: 'column' }}>
-      <div className="vscode-sidebar-header" style={{ padding: '12px 20px', fontSize: '11px', fontWeight: 600, letterSpacing: '0.5px' }}>
-        EXPLORER
+    <div className={`vscode-sidebar ${isOpen ? 'open' : ''}`} style={{ width: '250px', background: 'var(--vscode-sidebar-bg)', borderRight: '1px solid var(--vscode-border)', display: 'flex', flexDirection: 'column' }}>
+      <div className="vscode-sidebar-header" style={{ padding: '12px 20px', fontSize: '11px', fontWeight: 600, letterSpacing: '0.5px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span>EXPLORER</span>
+        <X 
+          size={16} 
+          className="mobile-close-btn" 
+          style={{ cursor: 'pointer', display: 'var(--mobile-close-display, none)' }} 
+          onClick={onClose} 
+        />
       </div>
       
       <div className="vscode-sidebar-section">
@@ -37,6 +43,7 @@ export default React.memo(function VSCodeSidebar() {
               <Link 
                 key={file.path} 
                 href={file.path}
+                onClick={onClose}
                 className={`vscode-sidebar-link ${isActive ? 'active' : ''}`}
                 style={{
                   display: 'flex',

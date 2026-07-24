@@ -1,12 +1,30 @@
 'use client';
 
+import React, { useState } from 'react';
 import VSCodeSidebar from './VSCodeSidebar';
 import VSCodeTabs from './VSCodeTabs';
-import { Search, Files, GitBranch, Settings, LayoutDashboard } from 'lucide-react';
+import { Search, Files, GitBranch, Settings, LayoutDashboard, Menu } from 'lucide-react';
 
 export default function VSCodeLayout({ children }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <div className="vscode-app">
+      {/* Mobile Header */}
+      <div className="mobile-header">
+        <Menu 
+          size={24} 
+          style={{ cursor: 'pointer', color: 'var(--vscode-text)' }} 
+          onClick={() => setIsMobileMenuOpen(true)}
+        />
+        <span style={{ fontSize: '13px', color: 'var(--vscode-text-muted)' }}>mithil-astik-portfolio</span>
+      </div>
+
+      {/* Mobile Overlay */}
+      <div 
+        className={`mobile-overlay ${isMobileMenuOpen ? 'open' : ''}`} 
+        onClick={() => setIsMobileMenuOpen(false)}
+      />
       {/* Title Bar */}
       <div className="vscode-titlebar" style={{ height: '30px', background: 'var(--vscode-titlebar-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', color: 'var(--vscode-text-muted)', position: 'relative' }}>
         <div style={{ position: 'absolute', left: '16px', display: 'flex', gap: '8px' }}>
@@ -31,7 +49,7 @@ export default function VSCodeLayout({ children }) {
         </div>
 
         {/* Sidebar */}
-        <VSCodeSidebar />
+        <VSCodeSidebar isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
 
         {/* Editor Area */}
         <div className="vscode-editor-pane">
