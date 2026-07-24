@@ -332,12 +332,20 @@ a {
 }
 
 /* Utilities */
+.hide-on-desktop {
+  display: none;
+}
+
 .text-yellow { color: var(--accent-yellow); }
 .text-blue { color: var(--accent-blue); }
 .text-green { color: var(--accent-green); }
 .text-red { color: var(--accent-red); }
 
 @media (max-width: 768px) {
+  .hide-on-desktop {
+    display: flex;
+  }
+  
   body {
     font-size: 20px;
   }

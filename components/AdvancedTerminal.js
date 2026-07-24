@@ -350,7 +350,7 @@ export default function AdvancedTerminal() {
                   border: 'none',
                   color: 'var(--text-primary)',
                   fontFamily: 'inherit',
-                  fontSize: '14px',
+                  fontSize: '16px',
                   outline: 'none',
                   flex: 1,
                   width: '100%'
@@ -365,11 +365,11 @@ export default function AdvancedTerminal() {
 
           {/* Mobile Quick Keys */}
           <div className="hide-on-desktop" style={{ 
-            display: 'none', // Overridden by media query in globals.css
             gap: '8px', 
             marginTop: '12px', 
             paddingTop: '12px', 
-            borderTop: '1px solid var(--border-subtle)' 
+            borderTop: '1px solid var(--border-subtle)',
+            flexWrap: 'wrap'
           }}>
             {['Tab', 'Up', 'Down', 'Ctrl+C'].map(key => (
               <button
