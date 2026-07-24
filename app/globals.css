@@ -117,3 +117,72 @@ a {
   overflow-y: auto;
   padding: 24px 32px;
 }
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .vscode-main {
+    flex-direction: column;
+  }
+
+  .vscode-activitybar {
+    display: none !important;
+  }
+
+  .vscode-statusbar {
+    display: none !important;
+  }
+
+  .vscode-titlebar {
+    display: none !important;
+  }
+
+  .vscode-sidebar {
+    width: 100% !important;
+    height: auto !important;
+    border-right: none !important;
+    border-top: 1px solid var(--vscode-border);
+    flex-direction: row !important;
+    order: 3; /* Move to bottom */
+  }
+
+  .vscode-editor-pane {
+    order: 1; /* Move above sidebar */
+  }
+
+  .vscode-sidebar-header {
+    display: none !important;
+  }
+
+  .vscode-sidebar-files {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 0 !important;
+  }
+
+  .vscode-sidebar-link {
+    padding: 8px !important;
+    border-left: none !important;
+    border-bottom: 2px solid transparent !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    font-size: 10px !important;
+    justify-content: center;
+  }
+  
+  .vscode-sidebar-link.active {
+    border-bottom: 2px solid var(--vscode-accent) !important;
+    background-color: var(--vscode-hover) !important;
+  }
+
+  .vscode-sidebar-link-text {
+    display: none !important; /* Hide file names on very small screens, or we can keep them */
+  }
+  
+  .vscode-editor-content {
+    padding: 16px 12px;
+  }
+}
+

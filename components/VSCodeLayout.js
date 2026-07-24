@@ -8,7 +8,7 @@ export default function VSCodeLayout({ children }) {
   return (
     <div className="vscode-app">
       {/* Title Bar */}
-      <div style={{ height: '30px', background: 'var(--vscode-titlebar-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', color: 'var(--vscode-text-muted)', position: 'relative' }}>
+      <div className="vscode-titlebar" style={{ height: '30px', background: 'var(--vscode-titlebar-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', color: 'var(--vscode-text-muted)', position: 'relative' }}>
         <div style={{ position: 'absolute', left: '16px', display: 'flex', gap: '8px' }}>
           <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ff5f56' }} />
           <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ffbd2e' }} />
@@ -21,7 +21,7 @@ export default function VSCodeLayout({ children }) {
 
       <div className="vscode-main">
         {/* Activity Bar */}
-        <div style={{ width: '48px', background: 'var(--vscode-activitybar-bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px 0', gap: '24px', color: 'var(--vscode-text-muted)' }}>
+        <div className="vscode-activitybar" style={{ width: '48px', background: 'var(--vscode-activitybar-bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '16px 0', gap: '24px', color: 'var(--vscode-text-muted)' }}>
           <Files size={24} color="var(--vscode-text)" />
           <Search size={24} />
           <GitBranch size={24} />
@@ -43,7 +43,7 @@ export default function VSCodeLayout({ children }) {
       </div>
 
       {/* Status Bar */}
-      <div style={{ height: '22px', background: 'var(--vscode-statusbar-bg)', color: 'white', fontSize: '11px', display: 'flex', alignItems: 'center', padding: '0 16px', justifyContent: 'space-between' }}>
+      <div className="vscode-statusbar" style={{ height: '22px', background: 'var(--vscode-statusbar-bg)', color: 'white', fontSize: '11px', display: 'flex', alignItems: 'center', padding: '0 16px', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><GitBranch size={12} /> main</span>
           <span>ⓧ 0 ⚠ 0</span>

@@ -19,24 +19,25 @@ export default React.memo(function VSCodeSidebar() {
   const pathname = usePathname();
 
   return (
-    <div style={{ width: '250px', background: 'var(--vscode-sidebar-bg)', borderRight: '1px solid var(--vscode-border)', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ padding: '12px 20px', fontSize: '11px', fontWeight: 600, letterSpacing: '0.5px' }}>
+    <div className="vscode-sidebar" style={{ width: '250px', background: 'var(--vscode-sidebar-bg)', borderRight: '1px solid var(--vscode-border)', display: 'flex', flexDirection: 'column' }}>
+      <div className="vscode-sidebar-header" style={{ padding: '12px 20px', fontSize: '11px', fontWeight: 600, letterSpacing: '0.5px' }}>
         EXPLORER
       </div>
       
-      <div>
-        <div style={{ padding: '4px 8px', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
+      <div className="vscode-sidebar-section">
+        <div className="vscode-sidebar-header" style={{ padding: '4px 8px', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
           <ChevronDown size={16} />
           PORTFOLIO
         </div>
         
-        <div style={{ paddingLeft: '12px' }}>
+        <div className="vscode-sidebar-files" style={{ paddingLeft: '12px' }}>
           {FILES.map((file) => {
             const isActive = pathname === file.path || (file.path !== '/' && pathname.startsWith(file.path));
             return (
               <Link 
                 key={file.path} 
                 href={file.path}
+                className={`vscode-sidebar-link ${isActive ? 'active' : ''}`}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -48,7 +49,7 @@ export default React.memo(function VSCodeSidebar() {
                 }}
               >
                 {file.icon}
-                {file.name}
+                <span className="vscode-sidebar-link-text">{file.name}</span>
               </Link>
             );
           })}
