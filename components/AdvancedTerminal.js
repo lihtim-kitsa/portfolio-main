@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { playKeypressSound } from '@/lib/audio';
+import { playTextBlip } from '@/lib/audio';
 import { MatrixRain } from '@/components/MatrixRain';
 
 const AVAILABLE_COMMANDS = [
@@ -295,7 +295,7 @@ export default function AdvancedTerminal() {
   };
 
   const handleInput = (e) => {
-    playKeypressSound();
+    playTextBlip();
     setInput(e.target.value);
   };
 
