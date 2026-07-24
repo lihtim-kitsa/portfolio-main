@@ -1,5 +1,5 @@
 /* ============================================
-   DESIGN SYSTEM — VS Code Theme (Aahana Dark)
+   DESIGN SYSTEM — Deltarune Style
    ============================================ */
 
 *,
@@ -11,218 +11,352 @@
 }
 
 :root {
-  /* VS Code Colors */
-  --vscode-bg: #1e1e1e;
-  --vscode-sidebar-bg: #252526;
-  --vscode-activitybar-bg: #333333;
-  --vscode-titlebar-bg: #323233;
-  --vscode-statusbar-bg: #007acc;
+  /* Deltarune UI Colors */
+  --bg-base: #000000;
+  --bg-surface: #0a0a0a;
   
-  --vscode-text: #cccccc;
-  --vscode-text-muted: #858585;
-  --vscode-border: #3c3c3c;
+  --text-primary: #ffffff;
+  --text-secondary: #aaaaaa;
   
-  --vscode-tab-active: #1e1e1e;
-  --vscode-tab-inactive: #2d2d2d;
+  --border-dialogue: #ffffff;
+  --border-menu: #ffffff;
   
-  --vscode-accent: #007acc;
-  --vscode-hover: #2a2d2e;
+  --accent-yellow: #ffff00;
+  --accent-blue: #00ffff;
+  --accent-green: #00ff00;
+  --accent-red: #ff0000;
+  --accent-purple: #a020f0;
   
-  /* Syntax Highlighting Colors */
-  --syn-comment: #6a9955;
-  --syn-keyword: #c586c0;
-  --syn-string: #ce9178;
-  --syn-function: #dcdcaa;
-  --syn-variable: #9cdcfe;
-  --syn-tag: #569cd6;
-  --syn-number: #b5cea8;
-  --syn-property: #4ec9b0;
+  --soul-red: #ff0000;
 }
 
 html, body {
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden; /* VS Code does not scroll the whole window */
+  background-color: var(--bg-base);
+  color: var(--text-primary);
 }
 
 body {
-  font-family: var(--font-jetbrains), 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--vscode-text);
-  background-color: var(--vscode-bg);
+  font-family: var(--font-vt323), monospace;
+  font-size: 28px;
+  line-height: 1.2;
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 10 10"><rect x="2" y="1" width="2" height="1" fill="%23ff0000"/><rect x="6" y="1" width="2" height="1" fill="%23ff0000"/><rect x="1" y="2" width="8" height="3" fill="%23ff0000"/><rect x="2" y="5" width="6" height="1" fill="%23ff0000"/><rect x="3" y="6" width="4" height="1" fill="%23ff0000"/><rect x="4" y="7" width="2" height="1" fill="%23ff0000"/></svg>') 12 12, auto;
+}
+
+a, button, [role="button"], .battle-action, .battle-button, .dialogue-box.battle-action {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 10 10"><rect x="2" y="1" width="2" height="1" fill="%23ffff00"/><rect x="6" y="1" width="2" height="1" fill="%23ffff00"/><rect x="1" y="2" width="8" height="3" fill="%23ffff00"/><rect x="2" y="5" width="6" height="1" fill="%23ffff00"/><rect x="3" y="6" width="4" height="1" fill="%23ffff00"/><rect x="4" y="7" width="2" height="1" fill="%23ffff00"/></svg>') 12 12, pointer !important;
 }
 
 a {
   color: inherit;
   text-decoration: none;
-  cursor: pointer;
 }
 
-.mono {
-  font-family: var(--font-jetbrains), 'JetBrains Mono', monospace;
-}
-
-/* Scrollbar for editor panes */
+/* Custom terminal scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--vscode-bg);
+  background: var(--bg-base);
 }
 ::-webkit-scrollbar-thumb {
-  background: #424242;
+  background: #333;
+  border-radius: 0;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #4f4f4f;
+  background: #555;
 }
 
-/* Syntax utilities */
-.syn-comment { color: var(--syn-comment); }
-.syn-keyword { color: var(--syn-keyword); }
-.syn-string { color: var(--syn-string); }
-.syn-function { color: var(--syn-function); }
-.syn-variable { color: var(--syn-variable); }
-.syn-tag { color: var(--syn-tag); }
-.syn-number { color: var(--syn-number); }
-.syn-property { color: var(--syn-property); }
-
-/* Layout classes */
-.vscode-app {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100vw;
-}
-
-.vscode-main {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
-}
-
-.vscode-editor-pane {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--vscode-bg);
-  overflow: hidden;
-}
-
-.vscode-editor-content {
-  flex: 1;
-  overflow-y: auto;
+/* Deltarune Dialogue Box */
+.dialogue-box {
+  background: black;
+  border: 4px solid white;
   padding: 24px 32px;
+  border-radius: 8px;
+  font-size: 32px;
+  min-height: 160px;
+  position: relative;
+  display: flex;
+  gap: 24px;
 }
 
-/* Mobile responsiveness */
+.dialogue-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Menu Button (Battle Menu Style) */
+.battle-menu-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px 0;
+  flex-wrap: wrap;
+}
+
+.battle-button {
+  background: black;
+  border: 3px solid #ff9900;
+  color: #ff9900;
+  padding: 12px 24px 12px 48px; /* Extra left padding for soul */
+  font-family: var(--font-vt323), monospace;
+  font-size: 28px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.1s;
+}
+
+.battle-button:hover, .battle-button.active {
+  border-color: var(--accent-yellow);
+  color: var(--accent-yellow);
+}
+
+/* The Soul Cursor */
+.soul {
+  position: absolute;
+  left: 12px;
+  color: var(--soul-red);
+  font-size: 20px;
+  opacity: 0;
+}
+
+.battle-button:hover .soul, .battle-button.active .soul {
+  opacity: 1;
+}
+
+/* Stats / Status Bar */
+.status-bar {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  font-size: 28px;
+  padding: 12px 32px;
+  border-bottom: 2px solid #333;
+  margin-bottom: 32px;
+}
+
+.status-name {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.status-lv {
+  font-size: 24px;
+}
+
+.hp-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hp-label {
+  font-size: 16px;
+  color: #888;
+}
+
+.hp-bar-bg {
+  width: 60px;
+  height: 24px;
+  background: #ff0000;
+}
+
+.hp-bar-fill {
+  width: 100%;
+  height: 100%;
+  background: #ffff00;
+}
+
+/* Animations */
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.shake {
+  animation: shake 0.5s;
+}
+
+@keyframes encounterFlash {
+  0% { opacity: 0; background: white; }
+  10% { opacity: 1; background: white; }
+  20% { opacity: 0; background: white; }
+  30% { opacity: 1; background: white; }
+  100% { opacity: 0; background: transparent; }
+}
+
+.encounter-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  animation: encounterFlash 0.5s ease-out forwards;
+}
+
+@keyframes fillBar {
+  from { width: 0%; }
+  to { width: var(--target-width, 100%); }
+}
+
+.fill-bar-anim {
+  animation: fillBar 1s ease-out forwards;
+  width: var(--target-width, 100%);
+}
+
+.anomalous-pixel {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 1px;
+  height: 1px;
+  background-color: #ff0000;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.battle-button.flash {
+  animation: shake 0.2s infinite;
+  background: var(--accent-yellow);
+  color: black;
+}
+
+.battle-button.flash .soul {
+  color: black;
+}
+
+/* Custom Tooltips */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+  border-bottom: 1px dashed var(--text-secondary);
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: max-content;
+  max-width: 250px;
+  background-color: black;
+  color: white;
+  text-align: left;
+  border: 2px solid white;
+  padding: 8px 12px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 20px;
+  font-family: var(--font-vt323), monospace;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Mercy Button */
+.mercy-button {
+  color: var(--accent-yellow) !important;
+  border-color: var(--accent-yellow) !important;
+  text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+}
+
+.mercy-button.active {
+  background: var(--accent-yellow) !important;
+  color: black !important;
+  text-shadow: none;
+}
+
+.mercy-button.active .soul {
+  color: black !important;
+}
+
+/* Idle Breathing */
+@keyframes breathe {
+  0% { border-color: rgba(255,255,255,1); box-shadow: 0 0 0 rgba(255,255,255,0); }
+  50% { border-color: rgba(255,255,255,0.7); box-shadow: 0 0 10px rgba(255,255,255,0.2); }
+  100% { border-color: rgba(255,255,255,1); box-shadow: 0 0 0 rgba(255,255,255,0); }
+}
+
+.dialogue-box {
+  animation: breathe 4s infinite ease-in-out;
+}
+
+/* Glitch Mode */
+@keyframes glitchAnim {
+  0% { filter: invert(0) hue-rotate(0deg); transform: translate(0); }
+  10% { filter: invert(1) hue-rotate(90deg); transform: translate(-5px, 5px); }
+  20% { filter: invert(0) hue-rotate(0deg); transform: translate(5px, -5px); }
+  30% { filter: invert(1) hue-rotate(180deg); transform: translate(-2px, 2px); }
+  40% { filter: invert(0) hue-rotate(0deg); transform: translate(2px, -2px); }
+  100% { filter: invert(0) hue-rotate(0deg); transform: translate(0); }
+}
+
+.glitch-mode {
+  animation: glitchAnim 0.5s steps(2) infinite;
+  background: #220000;
+}
+
+/* Damage Pop */
+@keyframes damagePop {
+  0% { transform: translateY(0) scale(0.5); opacity: 1; }
+  20% { transform: translateY(-20px) scale(1.2); opacity: 1; }
+  100% { transform: translateY(-40px) scale(1); opacity: 0; }
+}
+
+.damage-pop {
+  animation: damagePop 1s ease-out forwards;
+}
+
+/* Utilities */
+.text-yellow { color: var(--accent-yellow); }
+.text-blue { color: var(--accent-blue); }
+.text-green { color: var(--accent-green); }
+.text-red { color: var(--accent-red); }
+
 @media (max-width: 768px) {
-  .vscode-main {
-    flex-direction: column;
+  body {
+    font-size: 20px;
   }
-
-  .vscode-activitybar {
-    display: none !important;
+  .dialogue-box {
+    font-size: 22px;
+    padding: 16px 20px;
   }
-
-  .vscode-statusbar {
-    display: none !important;
+  .battle-menu-container {
+    gap: 8px;
   }
-
-  .vscode-titlebar {
-    display: none !important;
+  .battle-button {
+    font-size: 20px;
+    padding: 8px 16px 8px 36px;
   }
-
-  .vscode-sidebar {
-    --mobile-close-display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 260px !important;
-    height: 100vh !important;
-    border-right: 1px solid var(--vscode-border) !important;
-    border-top: none !important;
-    flex-direction: column !important;
-    z-index: 100;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    box-shadow: 4px 0 16px rgba(0,0,0,0.5);
-  }
-
-  .vscode-sidebar.open {
-    transform: translateX(0);
-  }
-
-  .vscode-sidebar-header {
-    display: flex !important;
-  }
-
-  .vscode-sidebar-files {
-    display: block !important;
-    width: 100%;
-    padding: 0 0 0 12px !important;
-  }
-
-  .vscode-sidebar-link {
-    padding: 8px 16px !important;
-    border-left: 2px solid transparent !important;
-    border-bottom: none !important;
-    flex-direction: row !important;
-    gap: 8px !important;
-    font-size: 14px !important;
-    justify-content: flex-start !important;
-  }
-  
-  .vscode-sidebar-link.active {
-    border-left: 2px solid var(--vscode-accent) !important;
-    border-bottom: none !important;
-    background-color: var(--vscode-hover) !important;
-  }
-
-  .vscode-sidebar-link-text {
-    display: inline !important;
-  }
-  
-  .vscode-editor-content {
-    padding: 16px 12px;
-  }
-
-  .mobile-header {
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    height: 48px;
-    background: var(--vscode-sidebar-bg);
-    border-bottom: 1px solid var(--vscode-border);
+  .status-bar {
+    font-size: 20px;
+    flex-wrap: wrap;
     gap: 16px;
-    flex-shrink: 0;
-  }
-
-  .mobile-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.5);
-    z-index: 90;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-
-  .mobile-overlay.open {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
-
-@media (min-width: 769px) {
-  .mobile-header, .mobile-overlay {
-    display: none !important;
+    padding: 12px;
   }
 }
 

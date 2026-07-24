@@ -1,0 +1,27 @@
+---
+title: "Project JARVIS: Inception and Architecture"
+date: "2026-07-21"
+excerpt: "A deep dive into how I built a personal AI assistant named JARVIS, its core workings, and architecture."
+tags: ["ai", "jarvis", "architecture", "python"]
+author: "Mithil Astik"
+---
+
+The idea of having a personal AI assistant has always fascinated me. Inspired by the classic sci-fi tropes, I decided to embark on a journey to build my own version of JARVIS. This isn't just a simple wrapper around an LLM API; it's a fully integrated system designed to manage my workflows, control smart devices, and assist with daily tasks.
+
+## The Core Architecture
+
+At its heart, JARVIS is a multi-modal agentic system. The architecture is broken down into three main pillars:
+
+1. **Perception Layer:** This handles voice activity detection (VAD), speech-to-text (using Whisper), and visual inputs when I share my screen.
+2. **Cognition Engine:** The brain of the operation. I use a combination of local models for simple routing and large-scale APIs (like Gemini and Claude) for complex reasoning tasks.
+3. **Action Execution:** This is where JARVIS actually *does* things. It has access to a tool registry that allows it to execute terminal commands, manage my calendar, send emails, and control local smart home APIs.
+
+## How It Works
+
+When I speak to JARVIS, the audio stream is continuously buffered and processed. Once the wake word is detected, the subsequent audio is transcribed. The Cognition Engine then parses the intent.
+
+If I say, "JARVIS, set up my development environment for the blog," it doesn't just reply with a confirmation. It uses the `Action Execution` layer to open VS Code, start the local development server, and even arrange my windows using system-level scripts.
+
+The system relies heavily on **Agentic Workflows**. It doesn't just generate text; it creates a plan, executes tools in a loop, and verifies the outcome before reporting back to me.
+
+Building this foundation was exhilarating, but it was only the beginning of a very challenging journey.

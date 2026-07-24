@@ -1,46 +1,34 @@
-import { Inter, Outfit, JetBrains_Mono } from 'next/font/google';
-import VSCodeLayout from '@/components/VSCodeLayout';
-import { TabProvider } from '@/components/TabContext';
+import { VT323 } from 'next/font/google';
+import MainLayout from '@/components/MainLayout';
 import AnimationProvider from '@/components/AnimationProvider';
 import PageTransition from '@/components/PageTransition';
 import './globals.css';
 
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
-});
-
-const outfit = Outfit({
-  variable: '--font-outfit',
-  subsets: ['latin'],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: '--font-jetbrains',
+const vt323 = VT323({
+  weight: '400',
+  variable: '--font-vt323',
   subsets: ['latin'],
 });
 
 export const metadata = {
   title: 'Mithil Astik | Portfolio',
-  description: 'Mithil Astik portfolio',
+  description: 'Mithil Astik portfolio - Deltarune Edition',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable}`}
+      className={`${vt323.variable}`}
       suppressHydrationWarning
     >
       <body>
         <AnimationProvider>
-          <TabProvider>
-            <VSCodeLayout>
-              <PageTransition>
-                {children}
-              </PageTransition>
-            </VSCodeLayout>
-          </TabProvider>
+          <MainLayout>
+            <PageTransition>
+              {children}
+            </PageTransition>
+          </MainLayout>
         </AnimationProvider>
       </body>
     </html>

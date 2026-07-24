@@ -1,5 +1,6 @@
 import { getAllProjects, getProjectCategories } from '@/lib/projects';
 import ProjectsListClient from './ProjectsListClient';
+import DialogueBox from '@/components/DialogueBox';
 
 export const metadata = {
   title: 'Projects',
@@ -11,27 +12,16 @@ export default function ProjectsPage() {
   const categories = getProjectCategories();
 
   return (
-    <div className="container">
-      <div style={{ padding: 'var(--space-16) 0 var(--space-8)' }}>
-        <h1 style={{
-          fontFamily: 'var(--font-heading)',
-          fontSize: 'var(--text-4xl)',
-          fontWeight: 700,
-          letterSpacing: '-0.03em',
-          marginBottom: 'var(--space-3)',
-        }}>
-          Projects
-        </h1>
-        <p style={{
-          fontSize: 'var(--text-base)',
-          color: 'var(--text-secondary)',
-          maxWidth: '500px',
-        }}>
-          Things I&apos;ve built, hacked on, and shipped. From side projects to serious tools.
-        </p>
+    <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      <div style={{ marginBottom: '32px' }}>
+        <DialogueBox 
+          text="* Here are my key items (projects)." 
+          speed={40} 
+        />
       </div>
 
       <ProjectsListClient projects={projects} categories={categories} />
     </div>
   );
 }
+

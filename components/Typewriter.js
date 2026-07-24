@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { m } from 'framer-motion';
 
+import { playKeypressSound } from '@/lib/audio';
+
 const PHRASES = [
   "Building resilient systems",
   "Designing intuitive interfaces",
@@ -24,10 +26,16 @@ export default function Typewriter() {
       const i = loopNum % PHRASES.length;
       const fullText = PHRASES[i];
 
-      setText(isDeleting
+      const newText = isDeleting
         ? fullText.substring(0, text.length - 1)
-        : fullText.substring(0, text.length + 1)
-      );
+        : fullText.substring(0, text.length + 1);
+        
+      setText(newText);
+      
+      // Play sound if a character was actually added or removed
+      if (newText.length !== text.length) {
+        playKeypressSound();
+      }
 
       // Speed up when deleting
       setTypingSpeed(isDeleting ? 30 : 40);

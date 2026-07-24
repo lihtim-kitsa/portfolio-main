@@ -1,3 +1,5 @@
+import DialogueBox from '@/components/DialogueBox';
+
 export const metadata = {
   title: 'About',
   description: 'About Mithil Astik',
@@ -5,58 +7,39 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="mono">
-      <div className="syn-comment" style={{ marginBottom: '24px' }}>
-        {'<!-- about.html - Mithil Astik -->'}
+    <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+      
+      <div style={{ marginBottom: '32px' }}>
+        <DialogueBox 
+          text="* Ah... I see you want to know more about me."
+          speed={50}
+        />
       </div>
 
-      <h1 style={{
-        fontFamily: 'var(--font-heading)',
-        fontSize: '48px',
-        fontWeight: 900,
-        color: '#ffffff',
-        textTransform: 'uppercase',
-        marginBottom: '16px'
-      }}>
-        About Me
-      </h1>
-
-      <div className="syn-comment" style={{ marginBottom: '48px' }}>
-        {'// who I am · what I do · where I build'}
-      </div>
-
-      <div style={{ border: '1px solid var(--vscode-border)', padding: '32px', borderRadius: '8px', marginBottom: '24px' }}>
-        <p style={{ lineHeight: 1.8 }}>
-          Hi! I'm <span className="syn-property">Mithil Astik</span>, a software developer living at the crossroads of <span className="syn-property">systems engineering</span>, <span className="syn-property">security</span>, and <span className="syn-property">open-source</span>. I love building systems that are not just functional but genuinely <span className="syn-function">resilient and efficient</span>. Currently, I'm exploring Rust and building developer tools.
+      <div className="dialogue-box" style={{ flexDirection: 'column', fontSize: '24px', lineHeight: '1.4', marginBottom: '32px' }}>
+        <p style={{ marginBottom: '16px' }}>
+          * Hi! I'm <span className="text-yellow">Mithil Astik</span>, a developer living at the crossroads of ML engineering, web development, and quantum computing. 
+        </p>
+        <p>
+          * I love building systems that are not just functional but genuinely resilient and efficient. Currently, I'm exploring Rust, building PINNs and having fun graphic designing.
         </p>
       </div>
 
-      <div style={{ border: '1px solid var(--vscode-border)', padding: '32px', borderRadius: '8px' }}>
-        <h2 style={{ fontSize: '16px', letterSpacing: '2px', color: 'var(--syn-property)', marginBottom: '24px', textTransform: 'uppercase' }}>
-          Current Focus
+      <div className="dialogue-box" style={{ flexDirection: 'column', fontSize: '24px' }}>
+        <h2 className="text-green" style={{ marginBottom: '16px', borderBottom: '2px solid white', paddingBottom: '8px' }}>
+          CURRENT QUESTS
         </h2>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', color: 'var(--vscode-text-muted)' }}>
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <span></span> Building performant CLI tools in Rust
-          </div>
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <span></span> Deep interest in security architectures
-          </div>
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <span></span> Exploring WebAssembly and systems programming
-          </div>
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <span></span> Talk to me about Linux, APIs, and open-source
-          </div>
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <span></span> Making complex systems understandable
-          </div>
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <span></span> Always learning, always shipping
-          </div>
+        
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div>* Building performant CLI tools in Rust</div>
+          <div>* Deep interest in security architectures</div>
+          <div>* Exploring WebAssembly and systems programming</div>
+          <div>* Talk to me about Linux, APIs, and open-source</div>
+          <div>* Making complex systems understandable</div>
+          <div>* Always learning, always shipping</div>
         </div>
       </div>
     </div>
   );
 }
+

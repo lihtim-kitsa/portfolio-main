@@ -16,8 +16,10 @@ export function TabProvider({ children }) {
   useEffect(() => {
     const file = FILES.find(f => pathname === f.path || (f.path !== '/' && pathname.startsWith(f.path)));
     if (file && !openTabs.find(t => t.path === file.path)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setOpenTabs(prev => [...prev, file]);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   const closeTab = useCallback((e, path) => {

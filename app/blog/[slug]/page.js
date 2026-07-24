@@ -35,26 +35,81 @@ export default async function BlogPostPage({ params }) {
   const htmlContent = renderMarkdown(post.content);
 
   return (
-    <div className="container" style={{ paddingTop: '120px', maxWidth: '800px' }}>
-      <article>
-        <Link href="/blog" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', textTransform: 'uppercase', marginBottom: '32px', color: 'var(--text-secondary)' }}>
-          <ArrowLeft size={12} />
-          back to blog
+    <div style={{ maxWidth: '900px', margin: '0 auto', paddingBottom: '64px' }}>
+      
+      <div style={{ marginBottom: '32px' }}>
+        <Link href="/blog" className="battle-action text-blue" style={{ textDecoration: 'none', display: 'inline-block', fontSize: '20px' }}>
+          ♥ [RETURN]
         </Link>
+      </div>
 
-        <header style={{ marginBottom: '48px' }}>
-          <div className="mono" style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>
-            <span>{formatDate(post.date)}</span>
-            <span style={{ margin: '0 8px' }}>·</span>
-            <span>{post.readingTime}</span>
+      <div className="dialogue-box" style={{ flexDirection: 'column', padding: '32px' }}>
+        <header style={{ marginBottom: '32px', borderBottom: '2px solid white', paddingBottom: '16px' }}>
+          <h1 className="text-yellow" style={{ fontSize: '32px', fontWeight: 'bold', marginBottom: '8px' }}>
+            * {post.title}
+          </h1>
+          <div style={{ color: '#888', fontSize: '16px' }}>
+            {formatDate(post.date)} | {post.readingTime}
           </div>
-          <h1 style={{ fontSize: '32px', fontWeight: 500 }}>{post.title}</h1>
         </header>
 
-        <div
+        <article 
+          className="blog-content"
+          style={{ fontSize: '20px', lineHeight: '1.6' }}
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
-      </article>
+      </div>
+
+      <style>{`
+        .blog-content h2 {
+          color: var(--accent-blue);
+          font-size: 28px;
+          margin-top: 32px;
+          margin-bottom: 16px;
+        }
+        .blog-content h3 {
+          color: var(--accent-green);
+          font-size: 24px;
+          margin-top: 24px;
+          margin-bottom: 12px;
+        }
+        .blog-content p {
+          margin-bottom: 24px;
+          color: var(--text-primary);
+        }
+        .blog-content ul, .blog-content ol {
+          margin-bottom: 24px;
+          padding-left: 32px;
+        }
+        .blog-content li {
+          margin-bottom: 8px;
+        }
+        .blog-content code {
+          background: #222;
+          padding: 2px 6px;
+          color: var(--accent-yellow);
+        }
+        .blog-content pre {
+          background: #111;
+          padding: 16px;
+          overflow-x: auto;
+          border: 1px solid #444;
+          margin-bottom: 24px;
+        }
+        .blog-content pre code {
+          background: transparent;
+          color: inherit;
+        }
+        .blog-content blockquote {
+          border-left: 4px solid var(--accent-yellow);
+          padding-left: 16px;
+          color: #888;
+          margin-bottom: 24px;
+        }
+        .blog-content a {
+          color: var(--accent-blue);
+        }
+      `}</style>
     </div>
   );
 }

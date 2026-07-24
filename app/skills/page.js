@@ -1,43 +1,60 @@
+import SkillsClient from './SkillsClient';
+
 export const metadata = {
   title: 'Skills',
   description: 'Technical skills',
 };
 
 export default function SkillsPage() {
-  const skills = {
-    languages: ["Python", "Rust", "JavaScript", "TypeScript", "C++", "HTML/CSS", "C"],
-    frameworks: ["React", "Next.js", "Node.js", "Express", "TailwindCSS", "Framer Motion"],
-    databases: ["PostgreSQL", "MongoDB", "Redis", "SQLite", "Vector DBs"],
-    tools: ["Git", "Docker", "Linux", "AWS", "Figma", "VS Code", "Adobe Photoshop", "Adobe Illustrator", "Adobe After Effects"],
-    machineLearning: ["PyTorch", "TensorFlow", "Scikit-Learn", "Hugging Face", "Pandas", "XGBoost"]
-  };
+  const categories = [
+    {
+      title: "LANGUAGES",
+      skills: [
+        { name: "Python", percentage: 92, color: "#d946ef" },
+        { name: "Java", percentage: 72, color: "#f97316" },
+        { name: "JavaScript", percentage: 78, color: "#eab308" },
+        { name: "TypeScript", percentage: 74, color: "#0ea5e9" },
+        { name: "SQL", percentage: 88, color: "#a855f7" },
+      ]
+    },
+    {
+      title: "GENERATIVE AI",
+      skills: [
+        { name: "LangChain", percentage: 82, color: "#10b981" },
+        { name: "LangGraph", percentage: 78, color: "#10b981" },
+        { name: "RAG Pipelines", percentage: 85, color: "#0ea5e9" },
+        { name: "Prompt Eng", percentage: 90, color: "#eab308" },
+        { name: "Agentic AI", percentage: 80, color: "#a855f7" },
+      ]
+    },
+    {
+      title: "AI & ML",
+      skills: [
+        { name: "PyTorch", percentage: 85, color: "#ef4444" },
+        { name: "TensorFlow", percentage: 80, color: "#f97316" },
+        { name: "scikit-learn", percentage: 90, color: "#eab308" },
+        { name: "Pandas", percentage: 88, color: "#6366f1" },
+      ]
+    },
+    {
+      title: "BACKEND",
+      skills: [
+        { name: "FastAPI", percentage: 90, color: "#10b981" },
+        { name: "Flask", percentage: 82, color: "#6366f1" },
+        { name: "Django", percentage: 76, color: "#10b981" },
+      ]
+    },
+    {
+      title: "DATABASES",
+      skills: [
+        { name: "PostgreSQL", percentage: 88, color: "#0ea5e9" },
+        { name: "MongoDB", percentage: 85, color: "#10b981" },
+        { name: "Redis", percentage: 82, color: "#ef4444" },
+        { name: "Pinecone", percentage: 85, color: "#10b981" },
+      ]
+    }
+  ];
 
-  return (
-    <div className="mono">
-      <div className="syn-comment" style={{ marginBottom: '24px' }}>
-        {'// skills.json - My technical stack'}
-      </div>
-
-      <div style={{ color: 'var(--vscode-text)' }}>{'{'}</div>
-
-      <div style={{ paddingLeft: '24px' }}>
-        {Object.entries(skills).map(([category, items], i, arr) => (
-          <div key={category}>
-            <span className="syn-property">"{category}"</span>: <span style={{ color: 'var(--vscode-text)' }}>[</span>
-            <div style={{ paddingLeft: '24px' }}>
-              {items.map((item, j) => (
-                <div key={item}>
-                  <span className="syn-string">"{item}"</span>
-                  <span style={{ color: 'var(--vscode-text)' }}>{j < items.length - 1 ? ',' : ''}</span>
-                </div>
-              ))}
-            </div>
-            <span style={{ color: 'var(--vscode-text)' }}>]{i < arr.length - 1 ? ',' : ''}</span>
-          </div>
-        ))}
-      </div>
-
-      <div style={{ color: 'var(--vscode-text)' }}>{'}'}</div>
-    </div>
-  );
+  return <SkillsClient categories={categories} />;
 }
+

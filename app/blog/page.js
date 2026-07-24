@@ -1,6 +1,6 @@
 import { getAllPosts, getAllCategories } from '@/lib/posts';
 import BlogListClient from './BlogListClient';
-import styles from './blog.module.css';
+import DialogueBox from '@/components/DialogueBox';
 
 export const metadata = {
   title: 'Blog',
@@ -12,12 +12,12 @@ export default function BlogPage() {
   const categories = getAllCategories();
 
   return (
-    <div className="container">
-      <div className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>Blog</h1>
-        <p className={styles.pageDescription}>
-          Writing about code, projects, and the things I learn along the way.
-        </p>
+    <div style={{ maxWidth: '1000px', margin: '0 auto', paddingBottom: '32px' }}>
+      <div style={{ marginBottom: '32px' }}>
+        <DialogueBox 
+          text="* You spot some ancient texts. Read them?" 
+          speed={40} 
+        />
       </div>
 
       <BlogListClient posts={posts} categories={categories} />

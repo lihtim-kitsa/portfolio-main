@@ -1,40 +1,100 @@
-export const metadata = {
-  title: 'Contact',
-  description: 'Contact Mithil Astik',
-};
+'use client';
 
-export default function ContactPage() {
+import React, { useState } from 'react';
+import DialogueBox from '@/components/DialogueBox';
+import { Mail, ArrowUpRight } from 'lucide-react';
+import { playHoverSound, playSelectSound } from '@/lib/audio';
+
+const GithubIcon = ({ size }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.24c3-.34 6-1.53 6-6.76 0-1.5-.5-2.8-1.4-3.8.14-.36.6-1.8-.14-3.8 0 0-1.1-.35-3.6 1.4-1-.28-2.2-.42-3.4-.42-1.2 0-2.4.14-3.4.42-2.5-1.75-3.6-1.4-3.6-1.4-.74 2-.28 3.44-.14 3.8-.9 1.4-1.3 1.4-3.8 0-5.23 3-6.42 6-6.76a4.8 4.8 0 0 0-1 3.24v4"></path>
+  </svg>
+);
+
+const LinkedinIcon = ({ size }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+    <rect x="2" y="9" width="4" height="12"></rect>
+    <circle cx="4" cy="4" r="2"></circle>
+  </svg>
+);
+
+const InstagramIcon = ({ size }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+  </svg>
+);
+
+const contacts = [
+  { name: "EMAIL", value: "astik.mithil@gmail.com", url: "mailto:astik.mithil@gmail.com", icon: <Mail size={20} />, color: "#14b8a6" },
+  { name: "LINKEDIN", value: "linkedin.com/in/mithil-astik", url: "https://linkedin.com/in/mithil-astik", icon: <LinkedinIcon size={20} />, color: "#3b82f6" },
+  { name: "GITHUB", value: "github.com/lihtim-kitsa", url: "https://github.com/lihtim-kitsa", icon: <GithubIcon size={20} />, color: "#f3f4f6" },
+  { name: "INSTAGRAM", value: "instagram.com/lihtimkitsa", url: "https://instagram.com/lihtimkitsa", icon: <InstagramIcon size={20} />, color: "#ec4899" }
+];
+
+export default function ContactTerminal() {
+  const [dialogueDone, setDialogueDone] = useState(false);
+
   return (
-    <div className="mono">
-      <div className="syn-comment" style={{ marginBottom: '24px' }}>
-        {'/* contact.css - Get in touch */'}
-      </div>
+    <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '32px' }}>
+      
+      <DialogueBox 
+        text="* You encountered MITHIL!
+* How would you like to connect?"
+        speed={40}
+        onComplete={() => setDialogueDone(true)}
+      />
 
-      <div style={{ color: 'var(--vscode-text)' }}>
-        <span className="syn-tag">.contact-info</span> {'{'}
-      </div>
+      {dialogueDone && (
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '16px', animation: 'fadeIn 1s' }}>
+          {contacts.map((contact, idx) => (
+            <a 
+              key={idx}
+              href={contact.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="dialogue-box"
+              style={{
+                textDecoration: 'none',
+                padding: '16px 24px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                minHeight: 'auto',
+                transition: 'all 0.2s',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = contact.color;
+                playHoverSound();
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'white';
+              }}
+              onClick={() => playSelectSound()}
+            >
+              <div style={{ color: contact.color, display: 'flex', alignItems: 'center' }}>
+                {contact.icon}
+              </div>
+              <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '24px' }}>
+                <span style={{ color: contact.color, fontWeight: 'bold', width: '120px' }}>{contact.name}</span>
+                <span style={{ color: 'var(--text-secondary)' }}>{contact.value}</span>
+              </div>
+              <ArrowUpRight size={24} color="#52525b" />
+            </a>
+          ))}
+        </div>
+      )}
 
-      <div style={{ paddingLeft: '24px' }}>
-        <div><span className="syn-property">email</span>: <a href="mailto:astik.mithil@gmail.com" target="_blank" rel="noreferrer" className="syn-string">"astik.mithil@gmail.com"</a>;</div>
-        <div><span className="syn-property">Instagram</span>: <a href="https://instagram.com/lihtimkitsa" target="_blank" rel="noreferrer" className="syn-string">"@lihtimkitsa"</a>;</div>
-        <div><span className="syn-property">github</span>: <a href="https://github.com/lihtim-kitsa" target="_blank" rel="noreferrer" className="syn-string">"github.com/lihtim-kitsa"</a>;</div>
-        <div><span className="syn-property">linkedin</span>: <a href="https://linkedin.com/in/mithil-astik" target="_blank" rel="noreferrer" className="syn-string">"linkedin.com/in/mithil-astik"</a>;</div>
-      </div>
-
-      <div style={{ color: 'var(--vscode-text)' }}>{'}'}</div>
-
-      <br />
-
-      <div style={{ color: 'var(--vscode-text)' }}>
-        <span className="syn-tag">.availability</span> {'{'}
-      </div>
-
-      <div style={{ paddingLeft: '24px' }}>
-        <div><span className="syn-property">status</span>: <span className="syn-string">"Open to opportunities"</span>;</div>
-        <div><span className="syn-property">response-time</span>: <span className="syn-number">24h</span>;</div>
-      </div>
-
-      <div style={{ color: 'var(--vscode-text)' }}>{'}'}</div>
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 }
+
