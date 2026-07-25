@@ -13,10 +13,10 @@ export default function ProjectsPage() {
 
   return (
     <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '32px' }}>
+      <div style={{ marginBottom: '64px' }}>
         <DialogueBox 
-          text="* Here are my key items (projects)." 
-          speed={40} 
+          text="* Accessing project archives... Each record is a world of its own. Some are complete, others are still mid-dungeon." 
+          speed={30} 
         />
       </div>
 

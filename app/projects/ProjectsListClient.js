@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { playSelectSound, playOminousTone } from '@/lib/audio';
+import { motion } from 'framer-motion';
 
 export default function ProjectsListClient({ projects }) {
   const [showEncounter, setShowEncounter] = useState(true);
@@ -26,59 +27,58 @@ export default function ProjectsListClient({ projects }) {
     <>
       {showEncounter && <div className="encounter-flash"></div>}
       
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '32px' }}>
-        {projects.map((project) => {
-          // Generate a pseudo-random HP based on title length just for fun
-          const maxHp = 100 + (project.title.length * 10);
-          
-          return (
-            <div key={project.id} className="dialogue-box" style={{ padding: '24px', display: 'flex', flexDirection: 'column', fontSize: '20px', minHeight: 'auto', gap: '16px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+        {projects.map((project) => (
+          <motion.div 
+            key={project.id} 
+            className="chapter-container"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="chapter-number">{project.chapter || '??'}</div>
+            
+            <div className="dialogue-box" style={{ padding: '32px', display: 'flex', flexDirection: 'column', fontSize: '24px', gap: '24px' }}>
               
-              {/* Enemy Name & Category */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h3 className="text-yellow" style={{ fontSize: '24px', fontWeight: 'bold' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
+                <h3 className="text-yellow text-glitch" data-text={`* ${project.title}`} style={{ fontSize: '36px', fontWeight: 'bold' }}>
                   * {project.title}
                 </h3>
-                <span style={{ fontSize: '14px', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
-                  {project.category}
-                </span>
+                
+                {project.status === 'Mid-Dungeon' ? (
+                  <div className="badge-mid-dungeon">⚠️ Mid-Dungeon</div>
+                ) : (
+                  <div className="badge-completed">Completed</div>
+                )}
               </div>
               
-              {/* Enemy HP */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <span style={{ fontSize: '16px', color: '#888' }}>HP</span>
-                <div style={{ flex: 1, height: '16px', background: '#ff0000', border: '2px solid white' }}>
-                  <div className="fill-bar-anim" style={{ height: '100%', background: '#ffff00', '--target-width': '100%' }}></div>
-                </div>
-                <span style={{ fontSize: '16px' }}>{maxHp}/{maxHp}</span>
-              </div>
-
-              {/* Enemy Stats (Tech) */}
-              <div style={{ fontSize: '16px', color: 'var(--text-secondary)' }}>
-                <span style={{ color: '#fff' }}>ATK:</span> {project.tech?.join(', ') || 'Unknown'}
+              {/* Tech Stack */}
+              <div style={{ fontSize: '20px', color: 'var(--text-secondary)' }}>
+                <span style={{ color: '#fff' }}>TECH_DATA:</span> {project.tech?.join(', ') || 'Unknown'}
               </div>
               
               {/* Description */}
-              <p style={{ color: 'var(--text-secondary)', fontSize: '20px', flex: 1, marginTop: '8px' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '24px', flex: 1, lineHeight: '1.4' }}>
                 {project.description || "No description provided."}
               </p>
 
-              {/* Battle Actions */}
-              <div style={{ display: 'flex', gap: '16px', fontSize: '20px', marginTop: '16px', borderTop: '2px dashed #444', paddingTop: '16px' }}>
+              {/* Actions */}
+              <div style={{ display: 'flex', gap: '24px', fontSize: '24px', marginTop: '16px', borderTop: '2px dashed #444', paddingTop: '24px' }}>
                 {project.link && project.link !== '#' && (
                   <a href={project.link.startsWith('http') ? project.link : `https://${project.link}`} target="_blank" rel="noreferrer" onClick={handleActionClick} className="battle-action text-yellow" style={{ textDecoration: 'none' }}>
-                    ♥ [USE]
+                    ♥ [EXPLORE_WORLD]
                   </a>
                 )}
                 {project.github && project.github !== '#' && (
                   <a href={project.github} target="_blank" rel="noreferrer" onClick={handleActionClick} className="battle-action text-blue" style={{ textDecoration: 'none' }}>
-                    ♥ [CHECK]
+                    ♥ [VIEW_SOURCE]
                   </a>
                 )}
               </div>
             </div>
-          );
-        })}
+          </motion.div>
+        ))}
       </div>
 
       <style jsx>{`
@@ -88,7 +88,7 @@ export default function ProjectsListClient({ projects }) {
         .battle-action:hover {
           background: white;
           color: black !important;
-          padding: 0 4px;
+          padding: 0 8px;
         }
       `}</style>
     </>
