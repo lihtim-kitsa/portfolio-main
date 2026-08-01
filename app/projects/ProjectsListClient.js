@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { playSelectSound, playOminousTone } from '@/lib/audio';
 import { motion } from 'framer-motion';
 
-export default function ProjectsListClient({ projects }) {
+export default function ProjectsListClient({ projects, categories = [] }) {
   const [showEncounter, setShowEncounter] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
   useEffect(() => {
     // Play a sound when entering the encounter
@@ -23,12 +24,39 @@ export default function ProjectsListClient({ projects }) {
     playOminousTone();
   };
 
+  const handleFilterClick = (category) => {
+    playSelectSound();
+    setSelectedCategory(category);
+  };
+
+  const filteredProjects = selectedCategory === 'All' 
+    ? projects 
+    : projects.filter(p => p.category === selectedCategory);
+
   return (
     <>
       {showEncounter && <div className="encounter-flash"></div>}
       
+      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginBottom: '32px' }}>
+        <button 
+          onClick={() => handleFilterClick('All')}
+          className={`filter-btn ${selectedCategory === 'All' ? 'active' : ''}`}
+        >
+          All
+        </button>
+        {categories.map(category => (
+          <button 
+            key={category}
+            onClick={() => handleFilterClick(category)}
+            className={`filter-btn ${selectedCategory === category ? 'active' : ''}`}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
       <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-        {projects.map((project) => (
+        {filteredProjects.map((project) => (
           <motion.div 
             key={project.id} 
             className="chapter-container"
@@ -89,6 +117,25 @@ export default function ProjectsListClient({ projects }) {
           background: white;
           color: black !important;
           padding: 0 8px;
+        }
+        .filter-btn {
+          background: transparent;
+          color: var(--text-secondary, #aaa);
+          border: 2px solid var(--text-secondary, #aaa);
+          padding: 8px 16px;
+          font-family: inherit;
+          font-size: 24px;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+        .filter-btn:hover {
+          color: white;
+          border-color: white;
+        }
+        .filter-btn.active {
+          background: white;
+          color: black;
+          border-color: white;
         }
       `}</style>
     </>
