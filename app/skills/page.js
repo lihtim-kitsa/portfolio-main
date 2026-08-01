@@ -8,6 +8,16 @@ export const metadata = {
 export default function SkillsPage() {
   const categories = [
     {
+      title: "FRONTEND & DESIGN",
+      skills: [
+        { name: "React", percentage: 88, color: "#61dafb" },
+        { name: "Next.js", percentage: 85, color: "#ffffff" },
+        { name: "Tailwind CSS", percentage: 92, color: "#38bdf8" },
+        { name: "Figma", percentage: 75, color: "#a259ff" },
+        { name: "HTML/CSS", percentage: 95, color: "#e34f26" },
+      ]
+    },
+    {
       title: "LANGUAGES",
       skills: [
         { name: "Python", percentage: 92, color: "#d946ef" },

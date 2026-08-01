@@ -31,13 +31,20 @@ export default function MainLayout({ children }) {
   }, []);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', padding: '32px' }}>
-      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '32px' }}>
         <div style={{ width: '100%', maxWidth: '900px' }}>
           {children}
         </div>
       </main>
-      <div style={{ marginTop: '32px' }}>
+      <div style={{ 
+        position: 'sticky', 
+        bottom: 0, 
+        background: 'var(--bg-base)', 
+        zIndex: 100, 
+        padding: '0 16px 16px 16px',
+        borderTop: '1px solid #333'
+      }}>
         <DeltaruneMenu />
       </div>
     </div>

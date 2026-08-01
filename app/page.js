@@ -220,7 +220,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
+      <div className="main-grid">
         
         {/* Stats Column */}
         <div className="dialogue-box" style={{ flexDirection: 'column', gap: '16px' }}>
@@ -276,6 +276,17 @@ export default function Home() {
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
+        }
+        .main-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 32px;
+        }
+        @media (max-width: 768px) {
+          .main-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
         }
       `}</style>
     </div>

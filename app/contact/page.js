@@ -55,13 +55,9 @@ export default function ContactTerminal() {
               href={contact.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="dialogue-box"
+              className="dialogue-box contact-card"
               style={{
                 textDecoration: 'none',
-                padding: '16px 24px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '16px',
                 minHeight: 'auto',
                 transition: 'all 0.2s',
                 cursor: 'pointer'
@@ -78,9 +74,9 @@ export default function ContactTerminal() {
               <div style={{ color: contact.color, display: 'flex', alignItems: 'center' }}>
                 {contact.icon}
               </div>
-              <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '24px' }}>
-                <span style={{ color: contact.color, fontWeight: 'bold', width: '120px' }}>{contact.name}</span>
-                <span style={{ color: 'var(--text-secondary)' }}>{contact.value}</span>
+              <div className="contact-info" style={{ flex: 1, display: 'flex' }}>
+                <span className="contact-name" style={{ color: contact.color, fontWeight: 'bold' }}>{contact.name}</span>
+                <span className="contact-value" style={{ color: 'var(--text-secondary)' }}>{contact.value}</span>
               </div>
               <ArrowUpRight size={24} color="#52525b" />
             </a>
@@ -92,6 +88,36 @@ export default function ContactTerminal() {
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+        .contact-card {
+          padding: 16px 24px;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+        .contact-info {
+          align-items: center;
+          gap: 24px;
+        }
+        .contact-name {
+          width: 120px;
+        }
+        .contact-value {
+          word-break: break-all;
+        }
+        @media (max-width: 600px) {
+          .contact-card {
+            padding: 12px 16px;
+            gap: 12px;
+          }
+          .contact-info {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+          }
+          .contact-name {
+            width: auto;
+          }
         }
       `}</style>
     </div>
