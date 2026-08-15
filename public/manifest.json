@@ -1,0 +1,16 @@
+{
+  "name": "Mithil Astik | Portfolio",
+  "short_name": "Mithil",
+  "description": "Mithil Astik portfolio - Deltarune Edition",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00ffff",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

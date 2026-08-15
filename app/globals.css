@@ -1,0 +1,457 @@
+/* ============================================
+   DESIGN SYSTEM — Deltarune Style
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Deltarune UI Colors */
+  --bg-base: #000000;
+  --bg-surface: #0a0a0a;
+  
+  --text-primary: #ffffff;
+  --text-secondary: #aaaaaa;
+  
+  --border-dialogue: #ffffff;
+  --border-menu: #ffffff;
+  
+  --accent-yellow: #ffff00;
+  --accent-blue: #00ffff;
+  --accent-green: #00ff00;
+  --accent-red: #ff0000;
+  --accent-purple: #a020f0;
+  
+  --soul-red: #ff0000;
+}
+
+html, body {
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+}
+
+body {
+  font-family: var(--font-vt323), monospace;
+  font-size: 28px;
+  line-height: 1.2;
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 10 10"><rect x="2" y="1" width="2" height="1" fill="%23ff0000"/><rect x="6" y="1" width="2" height="1" fill="%23ff0000"/><rect x="1" y="2" width="8" height="3" fill="%23ff0000"/><rect x="2" y="5" width="6" height="1" fill="%23ff0000"/><rect x="3" y="6" width="4" height="1" fill="%23ff0000"/><rect x="4" y="7" width="2" height="1" fill="%23ff0000"/></svg>') 12 12, auto;
+}
+
+a, button, [role="button"], .battle-action, .battle-button, .dialogue-box.battle-action {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 10 10"><rect x="2" y="1" width="2" height="1" fill="%23ffff00"/><rect x="6" y="1" width="2" height="1" fill="%23ffff00"/><rect x="1" y="2" width="8" height="3" fill="%23ffff00"/><rect x="2" y="5" width="6" height="1" fill="%23ffff00"/><rect x="3" y="6" width="4" height="1" fill="%23ffff00"/><rect x="4" y="7" width="2" height="1" fill="%23ffff00"/></svg>') 12 12, pointer !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, .battle-button:focus-visible {
+  outline: 2px dashed var(--accent-yellow);
+  outline-offset: 4px;
+}
+
+/* Custom terminal scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Deltarune Dialogue Box */
+.dialogue-box {
+  background: black;
+  border: 4px solid white;
+  padding: 24px 32px;
+  border-radius: 8px;
+  font-size: 32px;
+  min-height: 160px;
+  position: relative;
+  display: flex;
+  gap: 24px;
+}
+
+.dialogue-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Menu Button (Battle Menu Style) */
+.battle-menu-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px 0;
+  flex-wrap: wrap;
+}
+
+.battle-button {
+  background: black;
+  border: 3px solid #ff9900;
+  color: #ff9900;
+  padding: 12px 24px 12px 48px; /* Extra left padding for soul */
+  font-family: var(--font-vt323), monospace;
+  font-size: 28px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.1s;
+}
+
+.battle-button:hover, .battle-button.active {
+  border-color: var(--accent-yellow);
+  color: var(--accent-yellow);
+}
+
+/* The Soul Cursor */
+.soul {
+  position: absolute;
+  left: 12px;
+  color: var(--soul-red);
+  font-size: 20px;
+  opacity: 0;
+}
+
+.battle-button:hover .soul, .battle-button.active .soul {
+  opacity: 1;
+}
+
+/* Stats / Status Bar */
+.status-bar {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  font-size: 28px;
+  padding: 12px 32px;
+  border-bottom: 2px solid #333;
+  margin-bottom: 32px;
+}
+
+.status-name {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.status-lv {
+  font-size: 24px;
+}
+
+.hp-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hp-label {
+  font-size: 16px;
+  color: #999;
+}
+
+.hp-bar-bg {
+  width: 60px;
+  height: 24px;
+  background: #ff0000;
+}
+
+.hp-bar-fill {
+  width: 100%;
+  height: 100%;
+  background: #ffff00;
+}
+
+/* Animations */
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.shake {
+  animation: shake 0.5s;
+}
+
+@keyframes encounterFlash {
+  0% { opacity: 0; background: white; }
+  10% { opacity: 1; background: white; }
+  20% { opacity: 0; background: white; }
+  30% { opacity: 1; background: white; }
+  100% { opacity: 0; background: transparent; }
+}
+
+.encounter-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  animation: encounterFlash 0.5s ease-out forwards;
+}
+
+@keyframes fillBar {
+  from { width: 0%; }
+  to { width: var(--target-width, 100%); }
+}
+
+.fill-bar-anim {
+  animation: fillBar 1s ease-out forwards;
+  width: var(--target-width, 100%);
+}
+
+.anomalous-pixel {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 1px;
+  height: 1px;
+  background-color: #ff0000;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.battle-button.flash {
+  animation: shake 0.2s infinite;
+  background: var(--accent-yellow);
+  color: black;
+}
+
+.battle-button.flash .soul {
+  color: black;
+}
+
+/* Custom Tooltips */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+  border-bottom: 1px dashed var(--text-secondary);
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: max-content;
+  max-width: 250px;
+  background-color: black;
+  color: white;
+  text-align: left;
+  border: 2px solid white;
+  padding: 8px 12px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 20px;
+  font-family: var(--font-vt323), monospace;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Mercy Button */
+.mercy-button {
+  color: var(--accent-yellow) !important;
+  border-color: var(--accent-yellow) !important;
+  text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+}
+
+.mercy-button.active {
+  background: var(--accent-yellow) !important;
+  color: black !important;
+  text-shadow: none;
+}
+
+.mercy-button.active .soul {
+  color: black !important;
+}
+
+/* Idle Breathing */
+@keyframes breathe {
+  0% { border-color: rgba(255,255,255,1); box-shadow: 0 0 0 rgba(255,255,255,0); }
+  50% { border-color: rgba(255,255,255,0.7); box-shadow: 0 0 10px rgba(255,255,255,0.2); }
+  100% { border-color: rgba(255,255,255,1); box-shadow: 0 0 0 rgba(255,255,255,0); }
+}
+
+.dialogue-box {
+  animation: breathe 4s infinite ease-in-out;
+}
+
+/* Glitch Mode */
+@keyframes glitchAnim {
+  0% { filter: invert(0) hue-rotate(0deg); transform: translate(0); }
+  10% { filter: invert(1) hue-rotate(90deg); transform: translate(-5px, 5px); }
+  20% { filter: invert(0) hue-rotate(0deg); transform: translate(5px, -5px); }
+  30% { filter: invert(1) hue-rotate(180deg); transform: translate(-2px, 2px); }
+  40% { filter: invert(0) hue-rotate(0deg); transform: translate(2px, -2px); }
+  100% { filter: invert(0) hue-rotate(0deg); transform: translate(0); }
+}
+
+.glitch-mode {
+  animation: glitchAnim 0.5s steps(2) infinite;
+  background: #220000;
+}
+
+/* Damage Pop */
+@keyframes damagePop {
+  0% { transform: translateY(0) scale(0.5); opacity: 1; }
+  20% { transform: translateY(-20px) scale(1.2); opacity: 1; }
+  100% { transform: translateY(-40px) scale(1); opacity: 0; }
+}
+
+.damage-pop {
+  animation: damagePop 1s ease-out forwards;
+}
+
+/* Utilities */
+.hide-on-desktop {
+  display: none;
+}
+
+.text-yellow { color: var(--accent-yellow); }
+.text-blue { color: var(--accent-blue); }
+.text-green { color: var(--accent-green); }
+.text-red { color: var(--accent-red); }
+
+@media (max-width: 768px) {
+  .hide-on-desktop {
+    display: flex;
+  }
+  
+  body {
+    font-size: 20px;
+  }
+  .dialogue-box {
+    font-size: 22px;
+    padding: 16px 20px;
+  }
+  .battle-menu-container {
+    gap: 8px;
+  }
+  .battle-button {
+    font-size: 20px;
+    padding: 8px 16px 8px 36px;
+  }
+  .status-bar {
+    font-size: 20px;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 12px;
+  }
+}
+
+/* ============================================
+   CHAPTERS & WORLDS (PROJECTS)
+   ============================================ */
+
+.chapter-container {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 0;
+  border-bottom: 2px dashed #333;
+  position: relative;
+}
+
+.chapter-container:last-child {
+  border-bottom: none;
+}
+
+.chapter-number {
+  font-size: 20px;
+  color: var(--accent-red);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chapter-number::before {
+  content: "CHAPTER";
+  color: var(--text-secondary);
+}
+
+/* Mid-Dungeon Badges */
+.badge-mid-dungeon {
+  display: inline-block;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.8) 10px,
+    rgba(34, 0, 0, 0.8) 10px,
+    rgba(34, 0, 0, 0.8) 20px
+  );
+  border: 2px solid var(--accent-red);
+  color: var(--accent-red);
+  padding: 4px 12px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  animation: badgeBlink 3s infinite;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.1);
+}
+
+@keyframes badgeBlink {
+  0%, 100% { opacity: 1; border-color: var(--accent-red); }
+  50% { opacity: 0.7; border-color: #880000; }
+}
+
+.badge-completed {
+  display: inline-block;
+  border: 2px solid var(--text-secondary);
+  color: var(--text-secondary);
+  padding: 4px 12px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Subtle Text Glitch */
+@keyframes textGlitch {
+  0% { text-shadow: 2px 0 var(--accent-red), -2px 0 var(--accent-blue); transform: translate(1px, 0); }
+  2% { text-shadow: -2px 0 var(--accent-red), 2px 0 var(--accent-blue); transform: translate(-1px, 0); }
+  4% { text-shadow: 2px 0 var(--accent-red), -2px 0 var(--accent-blue); transform: translate(1px, 0); }
+  6% { text-shadow: none; transform: translate(0, 0); }
+  100% { text-shadow: none; transform: translate(0, 0); }
+}
+
+.text-glitch {
+  display: inline-block;
+  animation: textGlitch 4s infinite;
+}
