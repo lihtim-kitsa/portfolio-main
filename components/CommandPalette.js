@@ -17,7 +17,14 @@ export default function CommandPalette() {
     { name: 'cd /experience', action: () => router.push('/experience') },
     { name: 'cd /blog', action: () => router.push('/blog') },
     { name: 'cd /contact', action: () => router.push('/contact') },
-    { name: 'download resume', action: () => alert('Resume download initiated (placeholder)') },
+    { name: 'download resume', action: () => {
+      const link = document.createElement('a');
+      link.href = '/resume.pdf';
+      link.download = 'resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } },
   ];
 
   const filteredCommands = commands.filter(cmd => cmd.name.toLowerCase().includes(input.toLowerCase()));
