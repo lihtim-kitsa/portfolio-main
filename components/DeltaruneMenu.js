@@ -15,7 +15,8 @@ export default function DeltaruneMenu() {
     { name: 'PROJECTS', path: '/projects' },
     { name: 'SKILLS', path: '/skills' },
     { name: 'CONTACT', path: '/contact' },
-    { name: 'BLOG', path: '/blog' }
+    { name: 'BLOG', path: '/blog' },
+    { name: 'RESUME', path: '/resume.pdf' }
   ];
   
   // Find initial index based on pathname
@@ -86,7 +87,16 @@ export default function DeltaruneMenu() {
     setIsFlashing(true);
     setTimeout(() => {
       setIsFlashing(false);
-      router.push(path);
+      if (path === '/resume.pdf') {
+        const link = document.createElement('a');
+        link.href = '/resume.pdf';
+        link.download = 'resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        router.push(path);
+      }
     }, 200);
   };
 
